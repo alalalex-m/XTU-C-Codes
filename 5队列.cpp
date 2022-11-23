@@ -1,5 +1,4 @@
 //队列queue
-
 //顺序队列
 #include<stdio.h>
 #include<stdlib.h>
@@ -38,9 +37,9 @@ queue *init_queue(){
 //队列判空
 int empty(queue *q){
 	if(q->front==NULL){
-		return 1;   //1--表示真，说明队列非空
+		return 1;//1--表示真，说明队列非空
 	}else{
-		return 0;   //0--表示假，说明队列为空
+		return 0;//0--表示假，说明队列为空
 	}
 }
 
@@ -48,14 +47,15 @@ int empty(queue *q){
 void push(queue *q,int data){
 	node *n =init_node();
 	n->data=data;
-	n->next=NULL;   //采用尾插入法
+	n->next=NULL;//采用尾插入法
 	//if(q->rear==NULL){  
 	if(empty(q)){
 		q->front=n;
 		q->rear=n;
-	}else{
-		q->rear->next=n;    //n成为当前尾结点的下一结点
-		q->rear=n;  //让尾指针指向n
+	}
+	else{
+		q->rear->next=n;//n成为当前尾结点的下一结点
+		q->rear=n;//让尾指针指向n
 	}
 }
 
@@ -63,13 +63,14 @@ void push(queue *q,int data){
 void pop(queue *q){
 	node *n=q->front;
 	if(empty(q)){
-		return ;    //此时队列为空，直接返回函数结束
+		return;//此时队列为空，直接返回函数结束
 	}
 	if(q->front==q->rear){
-		q->front=NULL;  //只有一个元素时直接将两端指向制空即可
+		q->front=NULL;//只有一个元素时直接将两端指向制空即可
 		q->rear=NULL;
-		free(n);        //记得归还内存空间
-	}else{
+		free(n);//记得归还内存空间
+	}
+	else{
 		q->front=q->front->next;
 		free(n);
 	}
@@ -80,17 +81,17 @@ void print_queue(queue *q){
 	node *n = init_node();
 	n=q->front;
 	if(empty(q)){
-		return ;    //此时队列为空，直接返回函数结束
-	}
+		return;
+	}//此时队列为空，直接返回函数结束
 	while (n!=NULL)
-		{
-			printf("%d\t",n->data);
-			n=n->next;
-		}
-	printf("\n");   //记得换行
+	{
+		printf("%d\t",n->data);
+		n=n->next;
+	}
+	printf("\n");
 }
 
-//主函数调用，这里只是简单介绍用法
+//主函数
 int main(){
 	queue *q=init_queue();
 	printf("入队\n");
@@ -149,9 +150,7 @@ LQueue *init_LinkQueue()
 	LQueue *Q;
 	Q = (LQueue *)malloc(sizeof(LQueue));
 	head = (LinkQueue *)malloc(sizeof(LinkQueue));
-	if(0 == Q || 0 == head){
-		return Q;
-	}
+	if(0 == Q || 0 == head)	return Q;
 	head -> next = NULL;
 	Q -> front = head;
 	Q -> rear = head;
@@ -163,9 +162,7 @@ void enter_LinkQueue(LQueue *Q,elemtype x)
 {
 	LinkQueue *p;
 	p = (LinkQueue *)malloc(sizeof(LinkQueue));
-	if(0 == p){
-		return;
-	}
+	if(0 == p)	return;
 	p -> data = x;
 	p -> next = NULL;
 	Q -> front -> data ++;//记录节点的个数
@@ -179,10 +176,7 @@ void delete_LinkQueue(LQueue *Q,elemtype *x)
 {
 	LinkQueue *node;
 	node = Q -> front -> next;//首结点
-	if(Q -> front == Q -> rear){
-		return;
-	}
-	
+	if(Q -> front == Q -> rear)	return;
 	*x = node -> data;
 	Q -> front -> next  = node -> next;
 	if(node == Q -> rear){
@@ -234,4 +228,19 @@ int main()
 	}
 	printf("\n");
 	print(Q);
+}
+
+//双端队列遍历
+void traverse(DuQueue Q)
+{
+	if(isEmpty(Q))
+	{	cout<<"DuQueue is empty"<<endl;
+		return;
+	}
+	int temp=Q.front;
+	while(temp!=Q.rear)
+	{	cout<<Q.base[temp]<<"\t"<<endl;
+		temp=(temp+1)%Maxsize;
+	}
+	cout<<"OVER"<<endl;
 }
