@@ -1,3 +1,5 @@
+//特点：有穷，确定，可行，0/多输入，1/多输出
+//好算法：正确，易读，健壮，高效，低存储
 #include<iostream>
 using namespace std;
 #define Maxsize 4
